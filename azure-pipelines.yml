@@ -1,21 +1,21 @@
-# Node.js
-# Build a general Node.js project with npm.
-# Add steps that analyze code, save build artifacts, deploy, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
-
+# Kích hoạt pipeline khi có code mới đẩy lên nhánh master hoặc main
 trigger:
+- master
 - main
 
+# Sử dụng máy ảo Ubuntu mới nhất của Microsoft
 pool:
   vmImage: ubuntu-latest
 
 steps:
+# Bước 1: Cài đặt Node.js version 16.x
 - task: NodeTool@0
   inputs:
     versionSpec: '16.x'
   displayName: 'Install Node.js'
 
+# Bước 2: Chạy lệnh cài thư viện và build
 - script: |
     npm install
     npm run build
-  displayName: 'npm install and build'
+  displayName: 'Run npm install and build'
